@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ClimaRed - Dashboard de estaciones ambientales</title>
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1><span class="status-dot" id="status-dot"></span>ClimaRed</h1>
+    <div class="header-info">
+      <span id="reloj-conexion">Conectando...</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside id="sidebar">
+      <h2>Estaciones</h2>
+      <div id="lista-estaciones">Cargando estaciones...</div>
+    </aside>
+
+    <main id="contenido">
+      <section class="panel-grafico">
+        <div class="panel-cabecera">
+          <h2 id="titulo-estacion">Selecciona una estación</h2>
+          <div class="metricas-rapidas">
+            <span>Temp: <strong id="valor-temp">--</strong> °C</span>
+            <span>Humedad: <strong id="valor-hum">--</strong> %</span>
+            <span>CO2: <strong id="valor-co2">--</strong> ppm</span>
+            <span>Presión: <strong id="valor-presion">--</strong> hPa</span>
+          </div>
+        </div>
+        <canvas id="grafico-lecturas" height="110"></canvas>
+      </section>
+
+      <section class="panel-tabla">
+        <h2>Últimas lecturas (todas las estaciones)</h2>
+        <table id="tabla-lecturas">
+          <thead>
+            <tr>
+              <th>Hora</th>
+              <th>Estación</th>
+              <th>Temp (°C)</th>
+              <th>Humedad (%)</th>
+              <th>CO2 (ppm)</th>
+              <th>Presión (hPa)</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-lecturas-body">
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/sockets.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

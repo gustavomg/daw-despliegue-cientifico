@@ -1,0 +1,35 @@
+# Stack de observabilidad OPCIONAL para ClimaRed: Prometheus scrapea /metrics del backend
+# (lecturas/segundo recibidas, tamaño de buffer, lecturas persistidas/purgadas, etc.) y Grafana
+# permite construir paneles a partir de esas métricas. Se activa como añadido al compose principal:
+#   docker compose -f docker-compose.yml -f docker-compose.monitoring.yml up -d --build
+services:
+  prometheus:
+    image: prom/prometheus:v2.55.1
+    restart: unless-stopped
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+    networks: [climared_net]
+
+  grafana:
+    image: grafana/grafana:11.2.0
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
+    volumes:
+      - grafana_data:/var/lib/grafana
+    ports:
+      - "3002:3000"
+    depends_on: [prometheus]
+    networks: [climared_net]
+
+networks:
+  climared_net:
+    external: false
+
+volumes:
+  prometheus_data:
+  grafana_data:
