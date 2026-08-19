@@ -68,7 +68,7 @@ docker compose ps
 docker compose logs -f backend
 ```
 
-Abre `http://localhost/` (o el puerto configurado en `HTTP_PORT`).
+Abre `http://localhost:8080/` (o el puerto configurado en `HTTP_PORT`).
 
 ### Con monitorización (Prometheus + Grafana)
 
@@ -92,7 +92,7 @@ está en [`documentacion/Guia_Despliegue_y_Ejercicios_Cientifico.docx`](./docume
 | `redis`      | `redis:7-alpine`        | (interno, 6379)    | Buffer pub/sub entre sensor-sim y backend                 |
 | `sensor-sim` | `sensor-sim/Dockerfile` | —                   | Generador de lecturas simuladas (Python)                  |
 | `backend`    | `backend/Dockerfile`    | (interno, 3000)    | API REST + WebSocket + ingesta/persistencia (Node.js)     |
-| `nginx`      | `nginx/Dockerfile`      | `${HTTP_PORT:-80}` | Frontend estático + proxy inverso                          |
+| `nginx`      | `nginx/Dockerfile`      | `${HTTP_PORT:-8080}` | Frontend estático + proxy inverso                          |
 | `prometheus` | `prom/prometheus`       | `9090`              | Scraping de `/metrics` del backend (compose de monitorización) |
 | `grafana`    | `grafana/grafana`       | `3002`              | Paneles sobre las métricas de Prometheus (opcional)        |
 
