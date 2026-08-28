@@ -70,7 +70,8 @@ def conectar_redis():
             "[sensor-sim] Pasos de diagnóstico sugeridos:\n"
             "  1) docker compose ps                         -> ¿el servicio 'redis' está 'healthy'?\n"
             "  2) docker compose logs sensor-sim             -> revisa este mismo mensaje de error\n"
-            "  3) docker network inspect climared_net        -> ¿ambos contenedores están en la red?\n"
+            "  3) docker network ls                         -> el nombre real lleva delante el del proyecto\n"
+            "     docker network inspect <nombre_completo>  -> ¿ambos contenedores están en la red?\n"
             "  4) Revisa REDIS_HOST en docker-compose.yml/.env -> debe ser el nombre del servicio "
             "('redis'), no 'localhost' ni una IP fija.",
             file=sys.stderr,
